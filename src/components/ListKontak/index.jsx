@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getListKontak } from '../../actions/kontakAction';
+import { deleteKontak, getListKontak } from '../../actions/kontakAction';
 
 function ListKontak() {
 
-    const { getListKontakResult, getListKontakLoading, getListKontakError } = useSelector((state) => state.KontakReducer);
+    // panggil state Global
+    const { getListKontakResult, getListKontakLoading, getListKontakError, deleteKontakResult } = useSelector((state) => state.KontakReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,6 +15,14 @@ function ListKontak() {
 
     }, [dispatch])
 
+    // auto refresh
+    useEffect(()=> {
+        if(deleteKontakResult) {
+            console.log("5. Masuk component did update");
+            dispatch(getListKontak());
+        }
+    }, [dispatch, deleteKontakResult])
+
     return (
         <div>
             <h4>List Kontak</h4>
@@ -21,7 +30,11 @@ function ListKontak() {
                 getListKontakResult ? (
                     getListKontakResult.map((kontak) => {
                         return (
-                            <p key={kontak.id}>{kontak.nama} - {kontak.nohp}</p>
+                            <p key={kontak.id}>
+                                {kontak.nama} - 
+                                {kontak.nohp} - 
+                                <button onClick={ () => dispatch(deleteKontak(kontak.id)) }>Hapus</button>
+                            </p>
                         )
                     })
                 ) : getListKontakLoading ? (
