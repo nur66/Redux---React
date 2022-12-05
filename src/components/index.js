@@ -1,2 +1,5 @@
 import ListKontak from "./ListKontak";
-export { ListKontak }
+import AddKontak from "./AddKontak";
+
+
+export { ListKontak, AddKontak }

@@ -9,7 +9,7 @@ function ListKontak() {
 
     useEffect(() => {
         // panggil action getListKontak
-        console.log("1. use effect component did mount");
+        // console.log("1. use effect component did mount");
         dispatch(getListKontak())
 
     }, [dispatch])
