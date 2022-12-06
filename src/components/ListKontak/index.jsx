@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteKontak, getListKontak } from '../../actions/kontakAction';
+import { deleteKontak, detailKontak, getListKontak } from '../../actions/kontakAction';
 
 function ListKontak() {
 
@@ -10,7 +10,7 @@ function ListKontak() {
 
     useEffect(() => {
         // panggil action getListKontak
-        // console.log("1. use effect component did mount");
+        console.log("1. use effect component did mount");
         dispatch(getListKontak())
 
     }, [dispatch])
@@ -34,6 +34,7 @@ function ListKontak() {
                                 {kontak.nama} - 
                                 {kontak.nohp} - 
                                 <button onClick={ () => dispatch(deleteKontak(kontak.id)) }>Hapus</button>
+                                <button style={{ marginLeft: '10px' }} onClick={ () => { dispatch(detailKontak(kontak)) } }>Edit</button>
                             </p>
                         )
                     })

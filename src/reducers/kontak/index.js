@@ -1,4 +1,4 @@
-import { GET_LIST_KONTAK, ADD_KONTAK, DELETE_KONTAK } from "../../actions/kontakAction";
+import { GET_LIST_KONTAK, ADD_KONTAK, DELETE_KONTAK, DETAIL_KONTAK, UPDATE_KONTAK } from "../../actions/kontakAction";
 
 const initialState = {
     getListKontakResult : false,
@@ -11,7 +11,13 @@ const initialState = {
 
     deleteKontakResult : false,
     deleteKontakLoading : false,
-    deleteKontakError : false
+    deleteKontakError : false,
+
+    detailKontakResult: false,
+
+    updateKontakResult: false,
+    updateKontakLoading: false,
+    updateKontakError: false
 };
 
 const kontak = (state = initialState, action) => {
@@ -26,7 +32,7 @@ const kontak = (state = initialState, action) => {
             }
 
         case ADD_KONTAK:
-            console.log("4. Masuk reducer : ", action);
+            // console.log("4. Masuk reducer : ", action);
             return {
                 ...state,
                 addKontakResult: action.payload.data,
@@ -35,13 +41,31 @@ const kontak = (state = initialState, action) => {
             }
 
         case DELETE_KONTAK:
-            console.log("4. Masuk reducer : ", action);
+            // console.log("4. Masuk reducer : ", action);
             return {
                 ...state,
                 deleteKontakResult: action.payload.data,
                 deleteKontakLoading: action.payload.loading,
                 deleteKontakError: action.payload.errorMessage
             }
+        
+        case DETAIL_KONTAK:
+            console.log("5. Masuk reducer detail kontak : ", action);
+            return {
+                ...state,
+                detailKontakResult: action.payload.data
+            }
+
+        case UPDATE_KONTAK:
+            console.log("6. Masuk reducer - update kontak : ", action);
+
+            return {
+                ...state,
+                updateKontakResult: action.payload.data,
+                updateKontakLoading: action.payload.loading,
+                updateKontakError: action.payload.errorMessage
+            }
+            
         default:
             return state;
     }
